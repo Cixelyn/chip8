@@ -155,14 +155,13 @@ fn main() {
         }
 
         // Draw the screen
-        canvas.set_draw_color(Color::RGB(0, 0, 0));
-        canvas.clear();
-        canvas.set_draw_color(Color::RGB(255, 255, 255));
         {
             for (y, row) in cpu.read().unwrap().vram.iter().enumerate() {
                 for (x, byte) in row.iter().enumerate() {
-                    if !byte {
-                        continue;
+                    if *byte {
+                        canvas.set_draw_color(Color::RGB(255, 255, 255));
+                    } else {
+                        canvas.set_draw_color(Color::RGB(0, 0, 0));
                     }
                     canvas
                         .fill_rect(Rect::new(

@@ -247,6 +247,10 @@ impl Cpu {
         println!("ADD vi, v{}", vx);
         self.vi += self.reg[vx] as u16;
       }
+      (0xF, vx, 0x2, 0x9) => {
+        println!("FNT v{}", vx);
+        self.vi = self.reg[vx] as u16 * 0x10;
+      }
       (0xF, vx, 0x3, 0x3) => {
         println!("BCD v{}", vx);
         let i = self.vi as usize;
